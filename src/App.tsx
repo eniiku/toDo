@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './components/Navbar';
+import Panel from './components/Panel';
 
 const App = () => {
   return (
@@ -8,7 +9,7 @@ const App = () => {
       <main className='padding-x'>
         {/* Introduction Header */}
 
-        <div className='my-8 md:mt-12 sm:flex justify-between items-start'>
+        <section className='mt-8 md:mt-12 sm:flex justify-between items-start'>
           <div>
             <h1 className='font-inter font-semibold text-2xl leading-8 text-gray-900 md:font-work-sans md:text-3xl md:leading-[2.375rem]'>
               Good morning!
@@ -26,7 +27,21 @@ const App = () => {
 
             <span>Create New Task</span>
           </button>
-        </div>
+        </section>
+
+        {/* TASKS / DATE PICKER GRID */}
+
+        <section className='grid__main'>
+          {/*  PANEL/ TASK COMPS*/}
+
+          <div className='md:px-6'>
+            <Panel />
+          </div>
+
+          {/* DATEPICKER COMP */}
+
+          <div className='border-l border-gray-200'></div>
+        </section>
       </main>
     </React.Fragment>
   );

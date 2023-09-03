@@ -16,6 +16,10 @@
   .work-sans-sm {
     @apply font-work-sans text-sm leading-5;
   }
+
+  .padding-x {
+    @apply px-4 md:px-[5.2rem];
+  }
 }
 
 .max-container {
@@ -23,6 +27,14 @@
   margin: 0 auto;
 }
 
-.padding-x {
-  @apply px-4 md:px-[5.2rem];
+.w-inherit {
+  width: inherit;
+}
+
+@media screen and (min-width: 768px) {
+  .grid__main {
+    display: grid;
+    margin: 0 1.06rem;
+    grid-template-columns: 70% 30%;
+  }
 }
