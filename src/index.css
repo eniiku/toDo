@@ -1,8 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Work+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .text-alt-sm {
+    @apply font-inter text-[0.69675rem] md:font-work-sans md:text-sm md:leading-5;
+  }
+
+  .text-alt-normal {
+    @apply font-work-sans text-sm leading-5;
+  }
+
+  .work-sans-sm {
+    @apply font-work-sans text-sm leading-5;
+  }
+}
 
 .max-container {
   max-width: 1440px;
