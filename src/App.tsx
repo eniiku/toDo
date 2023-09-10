@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/ui/Navbar';
 import Panel from './components/Panel';
 import Actions from './components/ui/Actions';
+import TasksContainer from './components/ui/TasksContainer';
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
 
           <div className='md:px-6'>
             <Panel />
+            <TasksContainer />
           </div>
 
           {/* DATEPICKER COMP */}
