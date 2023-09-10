@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ClassNames, DayPicker } from 'react-day-picker';
 import styles from 'react-day-picker/dist/style.module.css';
 
@@ -15,6 +15,17 @@ const Actions = () => {
     title: '',
     completed: false,
   });
+  const [editedTodo, setEditedTodo] = useState({
+    id: 0,
+    title: '',
+    completed: false,
+  });
+
+  useEffect(() => {
+    if (selectedTodo) {
+      setEditedTodo(selectedTodo);
+    }
+  }, [selectedTodo]);
 
   const handleAddTodo = () => {
     if (newTodo.title.trim() !== '') {
@@ -40,6 +51,13 @@ const Actions = () => {
     }
 
     setAction(null);
+  };
+
+  const handleEditTodo = () => {
+    if (editedTodo.title) {
+      editTodo(editedTodo.id, { title: editedTodo.title });
+      setAction('preview');
+    }
   };
 
   const classNames: ClassNames = {
@@ -85,7 +103,7 @@ const Actions = () => {
                 setNewTodo({ ...newTodo, title: e.target.value })
               }
               className='form-input my-4 rounded-lg py-3 px-[0.875rem] border border-gray-300 bg-gray-50
-            shadow-[0_1px_2px_0_rgba(16,24,40,_0.05)] h-[8.75rem] w-full resize-none font-work-sans leading-6'
+            shadow-[0_1px_2px_0_rgba(16,24,40,_0.05)] h-[8.75rem] w-full resize-none font-work-sans leading-6 text-gray-500'
             ></textarea>
 
             <div>
@@ -165,7 +183,7 @@ const Actions = () => {
           <div className='px-6 py-5'>
             <div>
               <h1 className='text-[1.125rem] text-[#272727] font-bold first-letter:capitalize'>
-                {selectedTodo?.title}
+                {editedTodo.title}
               </h1>
 
               <div className='my-8 font-work-sans leading-[120%]'>
@@ -201,6 +219,100 @@ const Actions = () => {
             text-white work-sans-sm font-semibold shadow-[0_1px_2px_0_rgba(16,24,40,0.05)]'
               >
                 Edit
+              </button>
+            </div>
+          </div>
+        )
+      }
+
+      {
+        /* Add Edit tab - triggers when addTask is active */
+        action === 'edit' && (
+          <div className='p-6'>
+            <div className='flex items-center justify-between'>
+              <h1 className='font-semibold text-gray-900 font-work-sans text-[1.125rem] leading-[1.75rem]'>
+                Edit Task
+              </h1>
+
+              <button onClick={() => setAction(null)}>
+                <img src='/public/close.svg' alt='' />
+              </button>
+            </div>
+
+            <textarea
+              value={editedTodo.title}
+              onChange={(e) =>
+                setEditedTodo({ ...editedTodo, title: e.target.value })
+              }
+              className='form-input my-4 rounded-lg py-3 px-[0.875rem] border border-gray-300 bg-gray-50
+            shadow-[0_1px_2px_0_rgba(16,24,40,_0.05)] h-[8.75rem] w-full resize-none font-work-sans leading-6 text-gray-500'
+            ></textarea>
+
+            <div>
+              <div className='flex items-center justify-evenly work-sans-sm font-semibold'>
+                <button
+                  className='flex items-center gap-2 px-4 py-[0.63rem] rounded-lg border border-gray-300
+            shadow-[0_1px_2px_0_rgba(16,24,40,0.05)]'
+                >
+                  <span>
+                    <img src='/public/calender.svg' alt='' />
+                  </span>
+                  Today
+                </button>
+
+                <button
+                  className='flex items-center gap-2 px-4 py-[0.63rem] rounded-lg border border-gray-300
+            shadow-[0_1px_2px_0_rgba(16,24,40,0.05)]'
+                >
+                  <span>
+                    <img src='/public/clock.svg' alt='' />
+                  </span>
+                  00.00
+                </button>
+
+                <button
+                  className='flex items-center gap-2 px-4 py-[0.63rem] rounded-lg border border-gray-300
+            shadow-[0_1px_2px_0_rgba(16,24,40,0.05)]'
+                >
+                  <span>
+                    <img src='/public/clock.svg' alt='' />
+                  </span>
+                  00.00
+                </button>
+              </div>
+
+              <div className='mt-4 mb-8 flex items-center justify-between'>
+                <p className='font-inter font-medium text-[#667085]'>
+                  <span>
+                    <img
+                      src='/public/bell.svg'
+                      alt=''
+                      className='mr-2 inline-block'
+                    />
+                  </span>
+                  10 Minutes before
+                </p>
+
+                <img src='/public/close.svg' alt='' className='float-right' />
+              </div>
+            </div>
+
+            <div className='flex gap-3 justify-between items-center'>
+              <button
+                onClick={() => setAction('preview')}
+                className='w-[10.4375rem] px-4 py-[0.62rem] rounded-lg border border-gray-300
+            shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] font-inter font-semibold text-gray-700'
+              >
+                Cancel
+              </button>
+
+              {/* Saves edited todo Item */}
+              <button
+                onClick={handleEditTodo}
+                className='w-[10.4375rem] px-4 py-[0.62rem] rounded-lg bg-primary-blue border border-primary-blue 
+            text-white work-sans-sm font-semibold shadow-[0_1px_2px_0_rgba(16,24,40,0.05)]'
+              >
+                Save
               </button>
             </div>
           </div>
