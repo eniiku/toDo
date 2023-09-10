@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import useActionStore from '../useActionStore';
+import useTodoStore from '../useTodoStore';
 
 // Define the prop type
 interface Props {
@@ -12,12 +14,24 @@ interface Props {
 
 const TaskCard = (props: Props) => {
   const { taskInfo } = props;
+
+  const { setSelectedTodo, selectedTodo } = useTodoStore();
+  const { setAction } = useActionStore();
   const [isCompleted, setIsCompleted] = useState(taskInfo.completed);
+
+  const handleSelectTodo = () => {
+    setSelectedTodo(taskInfo);
+    setAction('preview');
+  };
 
   return (
     <li
       key={taskInfo.id}
-      className='flex items-center justify-between py-4 px-6 work-sans-sm border-b border-gray-200 bg-gray-50 mb-4'
+      onClick={handleSelectTodo}
+      className={`flex items-center justify-between py-4 px-6 work-sans-sm border-b border-gray-200 bg-gray-50 mb-4
+        hover:bg-[#EAEDFE] transition-colors duration-200 ease-in-out delay-75 ${
+          taskInfo === selectedTodo ? 'bg-[#EADEFE]' : ''
+        }`}
     >
       <div className='flex items-center gap-3'>
         <button>

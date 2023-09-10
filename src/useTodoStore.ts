@@ -14,10 +14,14 @@ interface TodoStore {
   removeTodo: (id: number) => void;
   addTodo: (todo: TodoItem) => void;
   editTodo: (id: number, updatedTodo: Partial<TodoItem>) => void;
+  selectedTodo: TodoItem | null;
+  setSelectedTodo: (todo: TodoItem | null) => void; // Add setSelectedTodo function
 }
 
 const useTodoStore = create<TodoStore>((set) => ({
   todos: [],
+
+  selectedTodo: null,
 
   // Function to fetch data for todos
   fetchTodos: async () => {
@@ -53,6 +57,8 @@ const useTodoStore = create<TodoStore>((set) => ({
     set((state) => ({
       todos: state.todos.filter((todo) => todo.id !== id),
     })),
+
+  setSelectedTodo: (todo) => set({ selectedTodo: todo }), // Action to set selectedTodo
 }));
 
 export default useTodoStore;

@@ -6,7 +6,7 @@ import useTodoStore from '../../useTodoStore';
 import useActionStore from '../../useActionStore';
 
 const Actions = () => {
-  const { addTodo, removeTodo, editTodo } = useTodoStore();
+  const { addTodo, removeTodo, editTodo, selectedTodo } = useTodoStore();
   const { action, setAction } = useActionStore();
   const [selected, setSelected] = useState<Date>();
   const [newTodo, setNewTodo] = useState({
@@ -34,12 +34,19 @@ const Actions = () => {
     }
   };
 
+  const handleRemoveTodo = () => {
+    if (selectedTodo) {
+      removeTodo(selectedTodo.id);
+    }
+
+    setAction(null);
+  };
+
   const classNames: ClassNames = {
     ...styles,
     // root: 'custom-root',
   };
 
-  console.log(selected);
   return (
     <div
       className='w-full shadow-[0_8px_8px_-4px_rgba(16,24,40,0.03),0_20px_24px_-4px_rgba(16,24,40,0.08)]
@@ -143,9 +150,57 @@ const Actions = () => {
               <button
                 onClick={handleAddTodo}
                 className='w-[10.4375rem] px-4 py-[0.62rem] rounded-lg bg-primary-blue border border-primary-blue 
-            text-white work-sans-sm font-semibold'
+            text-white work-sans-sm font-semibold shadow-[0_1px_2px_0_rgba(16,24,40,0.05)]'
               >
                 Add
+              </button>
+            </div>
+          </div>
+        )
+      }
+
+      {
+        // Preview task tab - triggers when todo item is clicked
+        action === 'preview' && (
+          <div className='px-6 py-5'>
+            <div>
+              <h1 className='text-[1.125rem] text-[#272727] font-bold first-letter:capitalize'>
+                {selectedTodo?.title}
+              </h1>
+
+              <div className='my-8 font-work-sans leading-[120%]'>
+                <h4 className='flex items-center gap-2'>
+                  <span>
+                    <img src='/public/calender.svg' alt='' className='fill' />
+                  </span>
+                  20th January, 2023
+                </h4>
+
+                <h4 className='flex items-center gap-2 mt-2'>
+                  <span>
+                    <img src='/public/clock.svg' alt='' />
+                  </span>
+                  8:00AM - 10:00AM
+                </h4>
+              </div>
+            </div>
+
+            <div className='flex gap-3 justify-between items-center'>
+              <button
+                onClick={handleRemoveTodo}
+                className='w-[10.4375rem] px-4 py-[0.62rem] rounded-lg border border-gray-300
+            shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] font-inter font-semibold text-gray-700'
+              >
+                Delete
+              </button>
+
+              {/* Adds new Todo to Global todo list */}
+              <button
+                onClick={() => setAction('edit')}
+                className='w-[10.4375rem] px-4 py-[0.62rem] rounded-lg bg-primary-blue border border-primary-blue 
+            text-white work-sans-sm font-semibold shadow-[0_1px_2px_0_rgba(16,24,40,0.05)]'
+              >
+                Edit
               </button>
             </div>
           </div>
