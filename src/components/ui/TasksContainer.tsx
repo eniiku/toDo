@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import useTodoStore from '../../store';
+import useTodoStore from '../../useTodoStore';
 import TaskCard from '../TaskCard';
 
 interface TodoItem {

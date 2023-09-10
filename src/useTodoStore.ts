@@ -36,9 +36,9 @@ const useTodoStore = create<TodoStore>((set) => ({
   },
 
   // Function to add a new todo item
-  addTodo: (todo: TodoItem) =>
+  addTodo: (newTodo: TodoItem) =>
     set((state) => ({
-      todos: [...state.todos, todo],
+      todos: [newTodo, ...state.todos],
     })),
 
   editTodo: (id: number, updatedTodo: Partial<TodoItem>) =>

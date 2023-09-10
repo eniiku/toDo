@@ -3,8 +3,11 @@ import Navbar from './components/ui/Navbar';
 import Panel from './components/Panel';
 import Actions from './components/ui/Actions';
 import TasksContainer from './components/ui/TasksContainer';
+import useActionStore from './useActionStore';
 
 const App = () => {
+  const { setAction } = useActionStore();
+
   return (
     <React.Fragment>
       <Navbar />
@@ -22,7 +25,10 @@ const App = () => {
             </p>
           </div>
 
-          <button className='hidden sm:flex items-center work-sans-sm gap-2 px-4 py-[0.62rem] rounded-lg bg-primary-blue text-white shadow-[0_1px_2px_0px_rgba(16,24,40,0.05)]'>
+          <button
+            onClick={() => setAction('add')}
+            className='hidden sm:flex items-center work-sans-sm gap-2 px-4 py-[0.62rem] rounded-lg bg-primary-blue text-white shadow-[0_1px_2px_0px_rgba(16,24,40,0.05)]'
+          >
             <span>
               <img src='/plus.svg' alt='' />
             </span>
@@ -36,14 +42,14 @@ const App = () => {
         <section className='grid__main'>
           {/*  PANEL/ TASK COMPS*/}
 
-          <div className='md:px-6'>
+          <div>
             <Panel />
             <TasksContainer />
           </div>
 
           {/* DATEPICKER COMP */}
 
-          <div className='hidden border-l border-gray-200 md:block md:px-6'>
+          <div className='hidden border-l border-gray-200 md:block md:pl-6 md:ml-6'>
             <Actions />
           </div>
         </section>
