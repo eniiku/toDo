@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import fetchTasks from '../../data/api';
 import TaskCard from '../TaskCard';
+import Pagination from '../Pagination';
 
 const TasksContainer = () => {
   const [tasks, setTasks] = useState<
@@ -21,13 +22,17 @@ const TasksContainer = () => {
 
   return (
     <div>
-      <h3>My Tasks</h3>
+      <h3 className='font-gray-900 font-work-sans font-semibold leading-6'>
+        My Tasks
+      </h3>
 
-      <ul>
+      <ul className='mt-4 mb-8'>
         {tasks.slice(0, 9).map((task) => (
           <TaskCard key={task.id} taskInfo={task} />
         ))}
       </ul>
+
+      <Pagination data={tasks} />
     </div>
   );
 };

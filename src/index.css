@@ -35,6 +35,7 @@
   .grid__main {
     display: grid;
     margin: 0 1.06rem;
+    margin-bottom: 6rem;
     grid-template-columns: 1fr auto;
   }
 }
