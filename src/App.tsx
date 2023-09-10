@@ -1,6 +1,7 @@
 import React from 'react';
-import Navbar from './components/Navbar';
+import Navbar from './components/ui/Navbar';
 import Panel from './components/Panel';
+import Actions from './components/ui/Actions';
 
 const App = () => {
   return (
@@ -40,7 +41,9 @@ const App = () => {
 
           {/* DATEPICKER COMP */}
 
-          <div className='border-l border-gray-200'></div>
+          <div className='hidden border-l border-gray-200 md:block md:px-6'>
+            <Actions />
+          </div>
         </section>
       </main>
     </React.Fragment>
