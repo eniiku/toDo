@@ -73,20 +73,42 @@ const Actions = () => {
       {
         // Sets Date picker as default tab / fallback
         action === null && (
-          <DayPicker
-            mode='single'
-            selected={selected}
-            classNames={classNames}
-            onSelect={setSelected}
-            showOutsideDays
-          />
+          <>
+            <div className='hidden md:block'>
+              <DayPicker
+                mode='single'
+                selected={selected}
+                classNames={classNames}
+                onSelect={setSelected}
+                showOutsideDays
+              />
+            </div>
+
+            <div className='md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white px-4 pt-4 pb-8'>
+              <button
+                onClick={() => setAction('add')}
+                className='flex items-center justify-between p-3 shadow-[0_1px_2px_0_rgba(16,24,40,0.05)] rounded-lg
+                border border-gray-300 w-full bg-[#F9FAFB]'
+              >
+                <p className='font-work-sans leading-6 text-[#475467]'>
+                  Input task
+                </p>
+                <span>
+                  <img src='/public/mic.svg' alt='' />
+                </span>
+              </button>
+            </div>
+          </>
         )
       }
 
       {
         /* Add task tab - triggers when addTask is active */
         action === 'add' && (
-          <div className='p-6'>
+          <div
+            className=' fixed h-[70vh] rounded-t-[1.75rem] bottom-0 left-0 right-0 bg-white z-40 md:static p-6 md:rounded-t-none md:h-auto
+          shadow-[0_0_0_800px_rgba(0,0,0,0.40)] md:shadow-none'
+          >
             <div className='flex items-center justify-between'>
               <h1 className='font-semibold text-gray-900 font-work-sans text-[1.125rem] leading-[1.75rem]'>
                 Add Task
@@ -180,9 +202,19 @@ const Actions = () => {
       {
         // Preview task tab - triggers when todo item is clicked
         action === 'preview' && (
-          <div className='px-6 py-5'>
+          <div
+            className='fixed h-[70vh] rounded-t-[1.75rem] bottom-0 left-0 right-0 bg-white z-40 md:relative md:rounded-t-none md:h-auto px-6 py-5
+          shadow-[0_0_0_800px_rgba(0,0,0,0.40)] md:shadow-none'
+          >
             <div>
-              <h1 className='text-[1.125rem] text-[#272727] font-bold first-letter:capitalize'>
+              <button
+                onClick={() => setAction(null)}
+                className='absolute top-6 right-6'
+              >
+                <img src='/public/close.svg' alt='' />
+              </button>
+
+              <h1 className='text-[1.125rem] text-[#272727] font-bold first-letter:capitalize mt-[3.75rem]'>
                 {editedTodo.title}
               </h1>
 
@@ -228,7 +260,10 @@ const Actions = () => {
       {
         /* Add Edit tab - triggers when addTask is active */
         action === 'edit' && (
-          <div className='p-6'>
+          <div
+            className='fixed h-[70vh] rounded-t-[1.75rem] bottom-0 left-0 right-0 bg-white z-40 md:static p-6 md:rounded-t-none md:h-auto
+           shadow-[0_0_0_800px_rgba(0,0,0,0.40)] md:shadow-none'
+          >
             <div className='flex items-center justify-between'>
               <h1 className='font-semibold text-gray-900 font-work-sans text-[1.125rem] leading-[1.75rem]'>
                 Edit Task

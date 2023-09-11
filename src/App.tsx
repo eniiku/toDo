@@ -49,7 +49,7 @@ const App = () => {
 
           {/* DATEPICKER COMP */}
 
-          <div className='hidden border-l border-gray-200 md:block md:pl-6 md:ml-6'>
+          <div className='border-l border-gray-200 md:pl-6 md:ml-6'>
             <Actions />
           </div>
         </section>
