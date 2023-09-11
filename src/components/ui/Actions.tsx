@@ -209,7 +209,7 @@ const Actions = () => {
             <div>
               <button
                 onClick={() => setAction(null)}
-                className='absolute top-6 right-6'
+                className='absolute top-6 right-6 z-50'
               >
                 <img src='/public/close.svg' alt='' />
               </button>
