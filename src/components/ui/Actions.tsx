@@ -62,7 +62,7 @@ const Actions = () => {
 
   const classNames: ClassNames = {
     ...styles,
-    // root: 'custom-root',
+    table: 'custom-table',
   };
 
   return (
@@ -74,11 +74,11 @@ const Actions = () => {
         // Sets Date picker as default tab / fallback
         action === null && (
           <>
-            <div className='hidden md:block'>
+            <div style={{ width: '100%' }} className='hidden md:block'>
               <DayPicker
                 mode='single'
-                selected={selected}
                 classNames={classNames}
+                selected={selected}
                 onSelect={setSelected}
                 showOutsideDays
               />
